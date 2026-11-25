@@ -84,7 +84,7 @@ function render() {
 
 async function loadCollection() {
   try {
-    const response = await fetch("covers.json");
+    const response = await fetch("covers.json?v=2", { cache: "no-cache" });
     if (!response.ok) throw new Error(`Catalog returned ${response.status}`);
     const data = await response.json();
     inventory = data.map(record => ({
