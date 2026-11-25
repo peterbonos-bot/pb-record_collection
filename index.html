@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Browse Peter Bonos’s personal vinyl collection by artist, title or catalog number.">
+<title>Record Collection | Peter Bonos</title>
+<link rel="stylesheet" href="styles.css">
+<script src="gallery.js" defer></script>
+</head>
+<body>
+<header class="masthead">
+  <div class="wrap"><p class="owner">Peter Bonos</p></div>
+</header>
+<main class="wrap">
+  <section class="intro" aria-labelledby="page-title">
+    <div><h1 id="page-title">Record<br>Collection</h1><p>A personal vinyl archive</p></div>
+    <div id="featured" class="featured" aria-hidden="true"></div>
+  </section>
+  <section aria-label="Browse records">
+    <div class="toolbar">
+      <div class="search-field">
+        <label for="search">Search the collection</label>
+        <input id="search" type="search" placeholder="Artist, title, or catalog number">
+      </div>
+      <div class="sort-field">
+        <label for="sort">Sort by</label>
+        <select id="sort"><option value="inventory">Catalog order</option><option value="artist">Artist</option><option value="title">Title</option></select>
+      </div>
+    </div>
+    <p id="status" role="status">Loading records…</p>
+    <ul class="records" id="records"></ul>
+    <noscript>Enable JavaScript to browse the cover gallery.</noscript>
+  </section>
+</main>
+<dialog aria-labelledby="detail-title">
+  <form method="dialog"><button class="close" aria-label="Close cover">×</button></form>
+  <img class="detail-cover" alt="">
+  <div class="detail-copy">
+    <h2 id="detail-title"></h2>
+    <p class="detail-artist"></p>
+    <p class="detail-note" hidden></p>
+    <a class="detail-source">Artwork source</a>
+  </div>
+</dialog>
+</body>
+</html>
