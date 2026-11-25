@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Browse Peter Bonos’s personal vinyl collection by artist, title or catalog number.">
+<meta name="description" content="Browse Peter Bonos’s personal record collection by artist, title or catalog number.">
 <title>Record Collection | Peter Bonos</title>
 <link rel="stylesheet" href="styles.css">
 <script src="gallery.js" defer></script>
@@ -14,7 +14,7 @@
 </header>
 <main class="wrap">
   <section class="intro" aria-labelledby="page-title">
-    <div><h1 id="page-title">Record<br>Collection</h1><p>A personal vinyl archive</p></div>
+    <div><h1 id="page-title">Record<br>Collection</h1><p>Vinyl, CDs, and cassettes</p></div>
     <div id="featured" class="featured" aria-hidden="true"></div>
   </section>
   <section aria-label="Browse records">
@@ -23,9 +23,13 @@
         <label for="search">Search the collection</label>
         <input id="search" type="search" placeholder="Artist, title, or catalog number">
       </div>
+      <div class="format-field">
+        <label for="format">Format</label>
+        <select id="format"><option value="">All formats</option><option>Vinyl</option><option>CD</option><option>Cassette</option></select>
+      </div>
       <div class="sort-field">
         <label for="sort">Sort by</label>
-        <select id="sort"><option value="inventory">Catalog order</option><option value="artist">Artist</option><option value="title">Title</option></select>
+        <select id="sort"><option value="inventory">Default order</option><option value="artist">Artist</option><option value="title">Title</option></select>
       </div>
     </div>
     <p id="status" role="status">Loading records…</p>
@@ -40,7 +44,10 @@
     <h2 id="detail-title"></h2>
     <p class="detail-artist"></p>
     <p class="detail-note" hidden></p>
-    <a class="detail-source">Artwork source</a>
+    <div class="detail-links">
+      <a class="detail-listing">Discogs listing</a>
+      <a class="detail-source">Artwork source</a>
+    </div>
   </div>
 </dialog>
 </body>

@@ -2,6 +2,7 @@
 
 const search = document.querySelector("#search");
 const sort = document.querySelector("#sort");
+const format = document.querySelector("#format");
 const records = document.querySelector("#records");
 const statusLine = document.querySelector("#status");
 const featured = document.querySelector("#featured");
@@ -29,11 +30,14 @@ function showCover(record) {
   image.src = record.file;
   image.alt = `Front cover of ${record.title}`;
   detail.querySelector("h2").textContent = record.title;
-  detail.querySelector(".detail-artist").textContent = [record.artist, record.catalog].filter(Boolean).join(" · ");
+  detail.querySelector(".detail-artist").textContent = [record.artist, record.format, record.catalog].filter(Boolean).join(" · ");
   const note = detail.querySelector(".detail-note");
   note.textContent = record.note || "";
   note.hidden = !record.note;
-  detail.querySelector("a").href = record.source;
+  const listing = detail.querySelector(".detail-listing");
+  listing.hidden = !record.listing;
+  if (record.listing) listing.href = record.listing;
+  detail.querySelector(".detail-source").href = record.source;
   detail.showModal();
 }
 
@@ -48,19 +52,27 @@ function makeCard(record) {
     artwork.append(coverImage(record, true));
     artwork.addEventListener("click", () => showCover(record));
   } else {
-    artwork.textContent = "Cover pending";
+    if (record.listing) {
+      const link = document.createElement("a");
+      link.href = record.listing;
+      link.textContent = "Discogs listing";
+      artwork.append(link);
+    } else {
+      artwork.textContent = "Cover pending";
+    }
   }
   const title = document.createElement("h2");
   title.textContent = record.title;
   const artist = document.createElement("p");
-  artist.textContent = [record.artist, record.catalog].filter(Boolean).join(" · ");
+  artist.textContent = [record.artist, record.format, record.catalog].filter(Boolean).join(" · ");
   card.append(artwork, title, artist);
   return card;
 }
 
 function render() {
   const terms = search.value.trim().split(/\s+/).map(normalize).filter(Boolean);
-  const visible = inventory.filter(record => terms.every(term => record.searchText.includes(term)));
+  const visible = inventory.filter(record => (!format.value || record.format === format.value) &&
+    terms.every(term => record.searchText.includes(term)));
   if (sort.value !== "inventory") {
     const key = sort.value;
     visible.sort((a, b) => collator.compare(a[key], b[key]) || a.id - b.id);
@@ -79,8 +91,8 @@ async function loadCollection() {
       ...record,
       searchText: normalize(`${record.artist} ${record.title} ${record.catalog}`),
     }));
-    const selections = [12, 3, 45].map(id => inventory.find(record => record.id === id && record.file));
-    featured.replaceChildren(...selections.filter(Boolean).map(record => coverImage(record, false)));
+    const selections = inventory.filter(record => record.format === "Vinyl" && record.file).slice(0, 3);
+    featured.replaceChildren(...selections.map(record => coverImage(record, false)));
     render();
   } catch (error) {
     console.error(error);
@@ -90,4 +102,5 @@ async function loadCollection() {
 
 search.addEventListener("input", render);
 sort.addEventListener("change", render);
+format.addEventListener("change", render);
 loadCollection();

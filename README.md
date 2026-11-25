@@ -2,7 +2,7 @@
 
 [Browse the gallery](https://peterbonos-bot.github.io/pb-record_collection/).
 
-The gallery uses local WebP files in `covers/`. Each image fits within 450 × 450 pixels and 60 KB. The `covers.json` manifest stores titles, catalog numbers, artwork source links, and notes on provisional matches. These images represent the album artwork. The source link identifies the release pictured.
+The gallery draws from the active `moments_last` Discogs inventory. Listings matched to Keith Terry’s catalog are excluded. The gallery uses local WebP files in `covers/`. Each image fits within 450 × 450 pixels and 60 KB. The `covers.json` manifest stores titles, formats, catalog numbers, listing URLs, and artwork source links. These images represent the album artwork. The source link identifies the release pictured.
 
 ## Preview locally
 
