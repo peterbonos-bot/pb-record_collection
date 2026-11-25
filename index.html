@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Browse Peter Bonos’s personal record collection by artist, title or catalog number.">
 <title>Record Collection | Peter Bonos</title>
-<link rel="stylesheet" href="styles.css">
-<script src="gallery.js?v=2" defer></script>
+<link rel="stylesheet" href="styles.css?v=3">
+<script src="gallery.js?v=3" defer></script>
 </head>
 <body>
 <header class="masthead">
@@ -27,10 +27,18 @@
         <label for="format">Format</label>
         <select id="format"><option value="">All formats</option><option>Vinyl</option><option>CD</option><option>Cassette</option></select>
       </div>
+      <div><label for="media">Media type</label><select id="media"><option value="">All media</option></select></div>
+      <div><label for="genre">Genre</label><select id="genre"><option value="">All genres</option></select></div>
       <div class="sort-field">
         <label for="sort">Sort by</label>
         <select id="sort"><option value="inventory">Default order</option><option value="artist">Artist</option><option value="title">Title</option></select>
       </div>
+    </div>
+    <div class="request-actions">
+      <button id="view-all" type="button">View All Records</button>
+      <button id="select-visible" type="button" disabled>Select results</button>
+      <button id="open-requests" type="button">View My Requests (0)</button>
+      <a href="https://www.discogs.com/seller/moments_last/profile">Discogs storefront (shared)</a>
     </div>
     <p id="status" role="status">Loading records…</p>
     <ul class="records" id="records"></ul>
@@ -49,6 +57,21 @@
       <a class="detail-source">Artwork source</a>
     </div>
   </div>
+</dialog>
+<dialog id="requests" aria-labelledby="requests-title">
+  <form method="dialog"><button class="close" aria-label="Close requests">×</button></form>
+  <section class="request-panel">
+    <h2 id="requests-title">My Requests</h2>
+    <ul id="request-items"></ul>
+    <p id="request-total"></p>
+    <label for="fulfillment">Delivery preference</label>
+    <select id="fulfillment"><option>Pickup</option><option>Shipping</option></select>
+    <label for="request-note">Note for Peter</label>
+    <textarea id="request-note" rows="2"></textarea>
+    <p>Peter will confirm availability and any shipping cost.</p>
+    <div class="request-actions"><button id="copy-request" type="button">Copy request</button><button id="download-request" type="button">Download request</button><a id="email-request">Open email draft</a></div>
+    <p id="request-status" role="status"></p>
+  </section>
 </dialog>
 </body>
 </html>
